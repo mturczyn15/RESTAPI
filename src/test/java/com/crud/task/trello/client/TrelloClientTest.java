@@ -34,17 +34,17 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
+        when(trelloConfig.getTrelloUsername()).thenReturn("marcinturczyn");
     }
 
     @Test
     public void shouldFetchTrelloBoards() throws URISyntaxException {
+
         // Given
-
-
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
-        trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
-
+        trelloBoards[0] = new TrelloBoardDto("test_board","test_id", new ArrayList<>());
         URI uri = new URI("http://test.com/members/marcinturczyn/boards?key=test&token=test&fields=name,id&lists=all");
+        System.out.println("z testa:" + uri);
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
 
         //When
@@ -55,7 +55,6 @@ public class TrelloClientTest {
         assertEquals("test_id", fetchedTrelloBoards.get(0).getId());
         assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
         assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
-
     }
 
     @Test
@@ -81,5 +80,21 @@ public class TrelloClientTest {
         assertEquals("1", newCard.getId());
         assertEquals("Test task", newCard.getName());
         assertEquals("http://test.com", newCard.getShortUrl());
+    }
+
+    @Test
+    public void shouldReturnEmptyList() throws URISyntaxException {
+
+        //Given
+        URI uri = new URI("http://test.com/members/marcinturczyn/boards?key=test&token=test&fields=name,id&lists=all");
+        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
+        System.out.println("z testa:" + uri);
+        //When
+        List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
+
+        //Then
+        assertEquals(0, fetchedTrelloBoards.size());
+        assertTrue(fetchedTrelloBoards.isEmpty());
+
     }
 }
