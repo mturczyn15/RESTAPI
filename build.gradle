@@ -19,14 +19,13 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	//compile('org.postgresql:postgresql:42.2.1')
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+
 	testCompile group: 'junit', name: 'junit', version: '4.13'
 	test {
 		useJUnitPlatform()
 	}
-	testCompile('org.mockito:mockito-all:1.10.19')
+
 	compile('mysql:mysql-connector-java')
 
 	//compile('org.apache.tomcat.embed:tomcat-embed-jasper')
