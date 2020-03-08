@@ -34,6 +34,7 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
+        when(trelloConfig.getTrelloUsername()).thenReturn("marcinturczyn");
     }
 
     @Test
@@ -41,8 +42,9 @@ public class TrelloClientTest {
 
         // Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
-        trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
+        trelloBoards[0] = new TrelloBoardDto("test_board","test_id", new ArrayList<>());
         URI uri = new URI("http://test.com/members/marcinturczyn/boards?key=test&token=test&fields=name,id&lists=all");
+        System.out.println("z testa:" + uri);
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
 
         //When
@@ -86,11 +88,12 @@ public class TrelloClientTest {
         //Given
         URI uri = new URI("http://test.com/members/marcinturczyn/boards?key=test&token=test&fields=name,id&lists=all");
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
+        System.out.println("z testa:" + uri);
         //When
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
 
         //Then
-        assertEquals(1, fetchedTrelloBoards.size());
+        assertEquals(0, fetchedTrelloBoards.size());
         assertTrue(fetchedTrelloBoards.isEmpty());
 
     }
