@@ -28,7 +28,7 @@ public class TrelloClient {
     private TrelloConfig trelloConfig;
 
     public List<TrelloBoardDto> getTrelloBoards() {
-        System.out.println("klient" + buildUri());
+
         try {
             TrelloBoardDto[] boardsResponse = restTemplate.getForObject(buildUri(), TrelloBoardDto[].class);
             Optional<TrelloBoardDto[]> boards = Optional.ofNullable(boardsResponse);
