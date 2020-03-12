@@ -1,6 +1,5 @@
 package com.crud.task.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -12,15 +11,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.function.Predicate;
-
-import static com.google.common.base.Predicates.and;
-import static springfox.documentation.builders.PathSelectors.regex;
-
 @EnableSwagger2
 @Configuration
 public class CoreConfiguration  implements WebMvcConfigurer {
-    private static final String NO_ERROR_REGEX = "(?!.*error).*$";
 
     @Bean
     public RestTemplate restTemplate() {
