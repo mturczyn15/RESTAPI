@@ -27,8 +27,12 @@ public class EmailSheduler {
         simpleEmailService.send(new Mail(
                 adminConfig.getAmdinMail(),
                 SUBJECT,
-                "Currently in database you got: " + size + " tasks "
+                "Currently in database you got: " + size + chooseMessage(size)
         ));
+    }
+
+    public static String chooseMessage(long size) {
+        return size>=2?" tasks ":" task ";
     }
 
 
