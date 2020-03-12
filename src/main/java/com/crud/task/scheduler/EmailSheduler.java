@@ -32,7 +32,7 @@ public class EmailSheduler {
     }
 
     public static String chooseMessage(long size) {
-        return size>=2?" tasks ":" task ";
+        return size > 1 ? " tasks " : " task ";
     }
 
 
