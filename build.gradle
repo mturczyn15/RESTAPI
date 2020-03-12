@@ -20,7 +20,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.postgresql:postgresql:42.2.1')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
-
+	compile('org.springframework.boot:spring-boot-starter-mail:1.5.7.RELEASE')
 	testCompile group: 'junit', name: 'junit', version: '4.13'
 	test {
 		useJUnitPlatform()
@@ -32,6 +32,4 @@ dependencies {
 	//providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 }
 
-test {
-	useJUnitPlatform()
-}
+
