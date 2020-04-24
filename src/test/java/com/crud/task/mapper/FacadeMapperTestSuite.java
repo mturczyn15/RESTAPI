@@ -1,7 +1,6 @@
-package com.crud.task;
+package com.crud.task.mapper;
 
 import com.crud.task.domain.*;
-import com.crud.task.mapper.TrelloMapper;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
