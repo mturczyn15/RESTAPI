@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -56,5 +57,15 @@ public class TaskMapperTest {
         assertEquals(1L, list.get(0).getId());
         assertEquals("task", list.get(0).getTitle());
         assertEquals("make sth", list.get(0).getContent());
+    }
+
+    @Test
+    public void testMapToTaskDtoEmptyList() {
+        //Given
+        List<Task> taskList = new ArrayList<>();
+        //When
+        List<TaskDto> list = taskMapper.mapToTaskDtoList(taskList);
+        //Then
+        assertTrue(list.isEmpty());
     }
 }

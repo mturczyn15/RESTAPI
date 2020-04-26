@@ -118,10 +118,11 @@ public class TaskControllerTest {
         Task task = new Task(1L, "task", "task");
         Task updatedTask = new Task(1L, "taskupdted", "taskupdated");
         TaskDto updatedTaskDto = new TaskDto(1L, "taskupdated", "taskupdated");
-        when(dbService.saveTask(task)).thenReturn(task);
         when(taskMapper.mapToTask(ArgumentMatchers.any(TaskDto.class))).thenReturn(updatedTask);
         when(dbService.saveTask(updatedTask)).thenReturn(updatedTask);
+        when(dbService.saveTask(task)).thenReturn(task);
         when(taskMapper.mapToTaskDto(ArgumentMatchers.any(Task.class))).thenReturn(updatedTaskDto);
+        dbService.saveTask(task);
         Gson gson = new Gson();
         String jsonContent = gson.toJson(updatedTaskDto);
         //When&Then

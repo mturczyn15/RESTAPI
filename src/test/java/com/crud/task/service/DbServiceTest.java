@@ -54,8 +54,8 @@ public class DbServiceTest {
         //Given
         Task task = new Task(1L, "task", "make");
         when(repository.save(task)).thenReturn(task);
-        //When
         dbService.saveTask(task);
+        //When
         dbService.deleteTask(1L);
         //Then
         assertEquals(0, repository.findAll().size());
@@ -68,8 +68,8 @@ public class DbServiceTest {
         Optional<Task> optional = Optional.of(task);
         when(repository.save(task)).thenReturn(task);
         when(repository.findById(1L)).thenReturn(optional);
-        //When
         repository.save(task);
+        //When
         Optional<Task> retrievedOptional = dbService.getTask(1L);
         //Then
         assertTrue(retrievedOptional.isPresent());
