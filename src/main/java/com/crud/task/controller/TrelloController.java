@@ -26,4 +26,12 @@ public class TrelloController {
     public CreatedTrelloCardDto createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloFacade.createCard(trelloCardDto);
     }
+
+    /*@RequestMapping(method = RequestMethod.POST, value = "test")
+    public CreatedTrelloCardDto createTrelloCardTest(@RequestParam String name,
+                                                     @RequestParam String description,
+                                                     @RequestParam String pos,
+                                                     @RequestParam String listId) {
+        return trelloFacade.createCard(new TrelloCardDto("kodilla", "desc", "1", "5e39d892965b0569ac025a48"));
+    }*/
 }
