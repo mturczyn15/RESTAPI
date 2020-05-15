@@ -17,7 +17,7 @@ public class EmailSheduler {
     @Autowired
     private TaskRepository taskRepository;
 
-    private static final String SUBJECT = "Tasks: New trello card";
+    private static final String SUBJECT = "Your tasks.";
 
     @Autowired
     private AdminConfig adminConfig;
@@ -28,7 +28,7 @@ public class EmailSheduler {
                 adminConfig.getAmdinMail(),
                 SUBJECT,
                 "Currently in database you got: " + size + chooseMessage(size)
-        ));
+        ), true);
     }
 
     public static String chooseMessage(long size) {
