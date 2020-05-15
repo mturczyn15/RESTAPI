@@ -32,6 +32,6 @@ public class TrelloController {
                                                      @RequestParam String description,
                                                      @RequestParam String pos,
                                                      @RequestParam String listId) {
-        return trelloFacade.createCard(new TrelloCardDto("kodilla", "desc", "1", "5e39d892965b0569ac025a48"));
+        return trelloFacade.createCard(new TrelloCardDto(name, description, pos, listId));
     }*/
 }
