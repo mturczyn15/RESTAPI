@@ -2,6 +2,7 @@ package com.crud.task.scheduler;
 
 import com.crud.task.config.AdminConfig;
 import com.crud.task.domain.Mail;
+import com.crud.task.domain.MailType;
 import com.crud.task.repository.TaskRepository;
 import com.crud.task.service.SimpleEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,10 @@ public class EmailSheduler {
                 adminConfig.getAmdinMail(),
                 SUBJECT,
                 "Currently in database you got: " + size + chooseMessage(size)
-        ), true);
+        ), MailType.DAILY);
     }
 
     public static String chooseMessage(long size) {
         return size > 1 ? " tasks " : " task ";
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.crud.task.service;
 
 import com.crud.task.domain.Mail;
+import com.crud.task.domain.MailType;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +23,10 @@ public class SimpleEmailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleEmailService.class);
 
-    public void send(final Mail mail, boolean sheduled) {
+    public void send(final Mail mail, MailType type) {
         LOGGER.info("Starting email preparation...");
         try {
-            if (sheduled) {
+            if (type == MailType.DAILY) {
                 javaMailSender.send(createDailyMimeMessage(mail));
             } else {
                 javaMailSender.send(createMimeMessage(mail));
@@ -53,7 +54,6 @@ public class SimpleEmailService {
             messageHelper.setText(mailCreatorService.buildDailyEmail(mail.getMessage()), true);
         };
     }
-
 
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
