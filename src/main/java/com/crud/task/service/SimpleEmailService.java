@@ -28,8 +28,10 @@ public class SimpleEmailService {
         try {
             if (type == MailType.DAILY) {
                 javaMailSender.send(createDailyMimeMessage(mail));
-            } else {
+            } if (type == MailType.TRELLOCARDMAIL) {
                 javaMailSender.send(createMimeMessage(mail));
+            } else {
+                javaMailSender.send(createMailMessage(mail));
             }
             LOGGER.info("Email has been send.");
         } catch (MailException e) {
