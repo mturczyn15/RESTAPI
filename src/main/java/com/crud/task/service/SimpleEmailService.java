@@ -22,10 +22,14 @@ public class SimpleEmailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleEmailService.class);
 
-    public void send(final Mail mail) {
+    public void send(final Mail mail, boolean sheduled) {
         LOGGER.info("Starting email preparation...");
         try {
-            javaMailSender.send(createMimeMessage(mail));
+            if (sheduled) {
+                javaMailSender.send(createDailyMimeMessage(mail));
+            } else {
+                javaMailSender.send(createMimeMessage(mail));
+            }
             LOGGER.info("Email has been send.");
         } catch (MailException e) {
             LOGGER.error("Failed to process email sending: ", e.getMessage(), e);
@@ -38,6 +42,15 @@ public class SimpleEmailService {
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
             messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+        };
+    }
+
+    private MimeMessagePreparator createDailyMimeMessage(final Mail mail) {
+        return MimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(MimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mailCreatorService.buildDailyEmail(mail.getMessage()), true);
         };
     }
 

@@ -44,4 +44,19 @@ public class MailCreatorService {
         context.setVariable("application_functionality", functionality);
         return templateEngine.process("mail/created-trello-card-mail", context);
     }
+
+    public String buildDailyEmail(String message) {
+
+        Context context = new Context();
+        context.setVariable("message", message);
+        context.setVariable("preview_message", "Information about task in database.");
+        context.setVariable("is_friend", true);
+        context.setVariable("admin_config", adminConfig);
+        context.setVariable("company_name", companyConfig.getCompanyName());
+        context.setVariable("company_goal", companyConfig.getCompanyGoal());
+        context.setVariable("company_mail", companyConfig.getCompanyMail());
+        context.setVariable("company_phone", companyConfig.getCompanyPhone());
+
+        return templateEngine.process("mail/created-daily-mail", context);
+    }
 }
